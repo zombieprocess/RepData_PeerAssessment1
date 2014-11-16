@@ -8,17 +8,18 @@ output:
 
 ## Loading and preprocessing the data
 
-```{r}
+
+```r
 library(knitr)
 #fig.path("figures")
 #base.dir("~/sandbox/repdata-008/RepData_PeerAssessment1")
 
 data <- read.csv("activity.csv")
-
 ```
 ## What is mean total number of steps taken per day?
 
-```{r}
+
+```r
 # Libraries
 library(plyr)
 library(ggplot2)
@@ -41,7 +42,14 @@ p1 + ylab("Count") + xlab("Total Steps") + geom_text(aes(meansum - 4000,12,label
 dev.off()
 ```
 
-The mean total number of steps taken per day are `r meansum`.
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
+
+```
+## RStudioGD 
+##         2
+```
+
+The mean total number of steps taken per day are 9354.2295.
 
 
 
@@ -50,7 +58,8 @@ The mean total number of steps taken per day are `r meansum`.
 A time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
 
-```{r}
+
+```r
 # Calculate the 5 minute interval average number of steps
 fiveInterval <- ddply(data, .(interval), summarise, avgSteps = mean(steps, na.rm=TRUE))
 
@@ -62,21 +71,29 @@ p2 +  ylab("Average Steps for all days") + xlab("5-minute Interval")
 
 # Close device
 dev.off()
+```
 
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
+
+```
+## RStudioGD 
+##         2
 ```
 
 
-```{r}
+
+```r
 # Determine the max value interval and save it
 maxInt_idx <- which.max(fiveInterval$avgSteps)
 ```
 
-The 5-minute interval `r fiveInterval[maxInt_idx,1]`, on average across all the days in the dataset, contains the maximum number of `r fiveInterval[maxInt_idx,2]` steps.
+The 5-minute interval 835, on average across all the days in the dataset, contains the maximum number of 206.1698 steps.
 
 
 ## Imputing missing values
 
-```{r}
+
+```r
 # Using the previous calculated fiveInterval averages, fill in missing data
 
 data_more <- as.data.frame(data)
@@ -94,7 +111,11 @@ I decided to use the 5 minute intervals average values since I have them on hand
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-```{r}
-warning("Ack! Ran out of time, on the road for a conference!")
 
+```r
+warning("Ack! Ran out of time, on the road for a conference!")
+```
+
+```
+## Warning: Ack! Ran out of time, on the road for a conference!
 ```
